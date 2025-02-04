@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MainPicFunc , DataFunc } from "@/context/context"
+import { MainPicFunc , DataFunc, typing } from "@/context/context"
 
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function Home() {
-  const mainPicture = await MainPicFunc();
+  interface mainPictureType {
+    image_url: string
+  }
+  const mainPicture:mainPictureType = await MainPicFunc();
   const highlightData = await DataFunc();
 
   // Slice first 3 items
@@ -71,7 +74,7 @@ export default async function Home() {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-          {highlights.map((item:any) => (
+          {highlights.map((item:typing) => (
             <Link 
               href={`/explore/${item._id}`} 
               key={item._id} 

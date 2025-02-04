@@ -1,10 +1,13 @@
-import { DataFunc } from "@/context/context"
+import { DataFunc , typing } from "@/context/context"
 import Image from "next/image";
 import Link from "next/link"
 
 export default async function Page() {
+
+ 
   
-  const Data:any = await DataFunc()
+  
+  const Data:typing[] = await DataFunc()
     return (
         <div className="flex items-center flex-col px-[20px] sm:px-[60px] justify-center w-full">
         <div className="flex flex-col items-center justify-center py-6">
@@ -16,8 +19,9 @@ export default async function Page() {
         </div>   
           
         
+        
         <div className="sm:grid sm:grid-cols-3 py-3 gap-4">
-    {Data.map((d:any) => (
+    {Data.map((d:typing) => (
       <Link href={`/product/${d._id}`} key={d._id}>
       <div  >
         {d.image &&

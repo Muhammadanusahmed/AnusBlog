@@ -1,13 +1,15 @@
 // [detail]/page.tsx
-import { DataFunc } from "@/context/context"
+import { DataFunc , typing } from "@/context/context"
 import Image from "next/image";
 
 export default async function DetailPage({ params }: { params: { detail: string } }) {
   // Fetch all data
-  const allData = await DataFunc();
+  interface extraTyping extends typing{detail: string}
+  
+  const allData: extraTyping[] = await DataFunc();
   
   // Find the specific item that matches the ID from the URL
-  const selectedItem = allData.find((item: any) => item._id === params.detail);
+  const selectedItem = allData.find((item: typing) => item._id === params.detail);
 
   // If no item is found, you can return a not found page
   if (!selectedItem) {
@@ -51,8 +53,8 @@ export default async function DetailPage({ params }: { params: { detail: string 
 
 // Generate static params for improved performance and SEO
 export async function generateStaticParams() {
-  const Data = await DataFunc();
-  return Data.map((item: any) => ({
+  const Data: typing[] = await DataFunc();
+  return Data.map((item: typing) => ({
     detail: item._id
   }))
 }
