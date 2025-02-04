@@ -21,7 +21,7 @@ export default async function Page() {
         
         
         <div className="sm:grid sm:grid-cols-3 py-3 gap-4">
-    {Data.map((d:typing) => (
+    {Data.map((d) => (
       <Link href={`/product/${d._id}`} key={d._id}>
       <div  >
         {d.image &&
